@@ -1,0 +1,3 @@
+verilog work "RAM.v"
+verilog work "Cache.v"
+verilog work "Top.v"

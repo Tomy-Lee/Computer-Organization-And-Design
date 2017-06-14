@@ -1,0 +1,5 @@
+set -tmpdir "C:/Users/Administrator/Desktop/Cache/xst/projnav.tmp"
+set -xsthdpdir "C:/Users/Administrator/Desktop/Cache/xst"
+elaborate
+-ifn Cache.prj
+-ifmt mixed

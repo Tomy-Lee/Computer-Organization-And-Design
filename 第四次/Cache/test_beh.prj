@@ -1,0 +1,5 @@
+verilog work "RAM.v"
+verilog work "Cache.v"
+verilog work "Top.v"
+verilog work "test.v"
+verilog work "D:/Xinlinx_ISE/14.4/ISE_DS/ISE//verilog/src/glbl.v"

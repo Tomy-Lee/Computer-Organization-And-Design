@@ -1,0 +1,70 @@
+.text					# 代码段 声明
+.globl main				# globl指明程序的入口地址 main
+main:
+	jal get_nums		# 读取
+	jal sort			# 排序
+	jal show_nums		# 输出
+	li $v0, 10
+	syscall
+
+get_nums:                                                                       # get_nums函数
+	la $t0, nums                                                  # la将链接地址传递到通用寄存器
+  	li $v0, 5                                                                # li将立即数传递到通用寄存器
+	li $t3, 10					# t3是nums的长度
+loop1:
+	syscall
+	sw $v0, ($t0)
+	addi $t0, $t0, 4
+	li $v0, 5
+	addi $t3, $t3, -1
+	beqz $t3, break1
+	j loop1
+break1:
+	jr $ra
+
+sort:                                                                               #  sort函数
+	la $t0, nums
+	addi $t0, $t0, 36
+	la $t1, nums
+loop_outer:
+	la $t7, nums 				# t7是内层循环次数
+	sub $t7, $t0, $t7
+loop_inner:
+	lw $t3, 0($t1)
+	lw $t4, 4($t1)
+	bgt $t4, $t3, skip_swap                                               # 比较两个数字大小
+	sw $t3, 4($t1)
+	sw $t4, 0($t1)
+skip_swap:                                                                       # 调换位置
+	addi $t1, $t1, 4
+	addi $t7, $t7, -4
+	beqz $t7, break_inner
+	j loop_inner
+break_inner:
+	la $t1, nums
+	addi $t0, $t0, -4
+	beq $t0, $t1, finish_sort
+	j loop_outer
+
+finish_sort:
+	jr $ra
+
+show_nums:                                                                  # show_nums函数
+	la $t0, nums
+	la $t1, nums
+	addi $t0, $t0, 36
+loop2:
+	lw $a0, ($t0)
+	li $v0, 1
+	syscall
+	li $a0, 0x20
+	li $v0, 11
+	syscall
+	addi $t0, $t0, -4                                                                      # 依次显示
+	bgt $t1, $t0, ok
+	j loop2
+ok:
+	jr $ra
+
+.data
+	nums: .space 50

@@ -1,0 +1,5 @@
+verilog isim_temp "RAM.v"
+verilog isim_temp "Cache.v"
+verilog isim_temp "Top.v"
+verilog isim_temp "test.v"
+verilog isim_temp "D:/Xinlinx_ISE/14.4/ISE_DS/ISE//verilog/src/glbl.v"
